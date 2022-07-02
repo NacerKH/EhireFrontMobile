@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utils;
+package Enums;
 
 /**
  *
- * @author LENOVO
+ * @author fsgha
  */
-public class Statitics {
-     public static String BASE_URL = "http://localhost:3015";
-}
+public enum StatusCongeType {PANNDING,CONFIRMED,REFUSED }

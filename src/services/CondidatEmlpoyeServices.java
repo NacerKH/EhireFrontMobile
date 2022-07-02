@@ -9,10 +9,11 @@ import Utils.Statitics;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import models.CondidatEmpolye;
+import models.CondidatEmployee;
 
 /**
  *
@@ -23,10 +24,10 @@ public class CondidatEmlpoyeServices {
     private String CondidatEmpolyeePrefix = "/CondidatEmpolyee";
        //var
     static CondidatEmlpoyeServices instance = null;
-    
+        boolean resultOK = false;
     ConnectionRequest req;
     
-    List<CondidatEmpolye > condidatEmpolye = new ArrayList<CondidatEmpolye>();
+    List<CondidatEmployee> condidatEmpolye = new ArrayList<CondidatEmployee>();
         //constructor
     private CondidatEmlpoyeServices() {
         req = new ConnectionRequest();
@@ -41,7 +42,7 @@ public class CondidatEmlpoyeServices {
     }
     
     //Ajout
-    public boolean addPerson(CondidatEmpolye condidat) {
+    public boolean addCondidatEmployee(CondidatEmployee condidat) {
 
         //build URL
         String addURL = Statitics.BASE_URL + CondidatEmpolyeePrefix  + "/add";
@@ -53,13 +54,17 @@ public class CondidatEmlpoyeServices {
         req.setPost(true);
 
         //4 : Transfert data
-        req.addArgument("id_offer", condidat.get);
-        req.addArgument("id_user", condidat.getEmail());
-        req.addArgument("cv_url", condidat.getPassword());
-        req.addArgument("status", condidat.getDate());
-        req.addArgument("genre",condidat.getGenre());
-        req.addArgument("XP", String.valueOf(condidat.getXP()));
-        req.addArgument("hobbies", p.getHobbies().toString());
+        req.addArgument("id_offer",String.valueOf(condidat.getOffer_id().getId()) );
+        req.addArgument("id_user", String.valueOf(condidat.getUser_id().getId()));
+        req.addArgument("cv_url", condidat.getCv_url());
+        req.addArgument("status", condidat.getStatus().name());
+        SimpleDateFormat
+                format = new SimpleDateFormat("yyyy-MM-dd");
+        String createdAt = format.format(condidat.getCreatedDate());
+        String updatedAt = format.format(condidat.getCreatedDate());
+        req.addArgument("CreatedDate", createdAt );
+         req.addArgument("UpdatedDate", updatedAt);
+
 
         //5
         req.addResponseListener(new ActionListener<NetworkEvent>() {

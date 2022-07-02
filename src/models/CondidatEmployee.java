@@ -6,13 +6,14 @@
 package models;
 
 import java.util.Date;
-
+import Enums.Status;
 /**
  *
  * @author LENOVO
  */
-public class CondidatEmpolye  extends BaseEntity {
-      public JobOffer offer_id;
+public class CondidatEmployee extends BaseEntity {
+
+    public JobOffer offer_id;
     public User user_id;
     public String cv_url;
     public  Status  status;
@@ -109,4 +110,8 @@ public class CondidatEmpolye  extends BaseEntity {
     public String toString() {
         return "CondidatEmployee{" + "offer_id=" + offer_id + ", user_id=" + user_id + ", cv_url=" + cv_url + ", status=" + status + '}';
     }
+
+  
+    
+
 }
